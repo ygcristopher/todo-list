@@ -44,3 +44,22 @@
     gap: 0.75rem;
     color: white;
 }
+
+.empty {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--gray-300);
+    text-align: center;
+}
+
+.empty svg {
+    opacity: 0.3rem;
+}
+
+.empty p {
+    font-weight: 700;
+}
