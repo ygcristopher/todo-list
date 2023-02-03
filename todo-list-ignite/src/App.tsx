@@ -1,9 +1,9 @@
-import { Header } from './components/Header/Header'
-import { Tasks } from './components/Tasks/Tasks'
-import '../src/styles/global.css'
-import { useState, useEffect } from 'react'
+import { Header } from "./components/Header/Header";
+import { Tasks } from "./components/Tasks/Tasks";
+import "../src/styles/global.css";
+import { useState, useEffect } from "react";
 
-
+/* LOCAL STORAGE */
 const LOCAL_STORAGE_KEY = "todo:savedTasks";
 
 export interface ITask {
@@ -15,17 +15,19 @@ export interface ITask {
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
+  /* LOCAL STORAGE */
   function loadSavedTasks() {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if(saved){
+    if (saved) {
       setTasks(JSON.parse(saved));
     }
   }
 
   useEffect(() => {
     loadSavedTasks();
-  }, [])
+  }, []);
 
+  /* LOCAL STORAGE */
   function setTasksAndSave(newTasks: ITask[]) {
     setTasks(newTasks);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
@@ -38,23 +40,23 @@ function App() {
         id: crypto.randomUUID(),
         title: taskTitle,
         isCompleted: false,
-      }
-    ])
+      },
+    ]);
   }
 
-  function deleteTaskById(taskId: string){
+  /* DELETE TASK */
+  function deleteTaskById(taskId: string) {
     const newTasks = tasks.filter((task) => task.id != taskId);
     setTasksAndSave(newTasks);
   }
 
-
   function toggleTaskCompletedById(taskId: string) {
-    const newTasks = tasks.map(task => {
-      if(task.id == taskId) {
+    const newTasks = tasks.map((task) => {
+      if (task.id == taskId) {
         return {
           ...task,
           isCompleted: !task.isCompleted,
-        }
+        };
       }
       return task;
     });
@@ -63,10 +65,14 @@ function App() {
 
   return (
     <>
-    <Header onAddTask={addTask} />
-    <Tasks tasks={tasks} onDelete={deleteTaskById} onComplete={toggleTaskCompletedById}/>
+      <Header onAddTask={addTask} />
+      <Tasks
+        tasks={tasks}
+        onDelete={deleteTaskById}
+        onComplete={toggleTaskCompletedById}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
