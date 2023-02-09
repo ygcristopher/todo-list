@@ -12,7 +12,7 @@ export function Header({ onAddTask }: Props) {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-
+    
     onAddTask(title);
     setTitle("");
   }
@@ -36,7 +36,7 @@ export function Header({ onAddTask }: Props) {
           <AiOutlinePlusCircle size={20} />
         </button>
       </form>
-    </header>
+    </header> 
   );
 }
 
